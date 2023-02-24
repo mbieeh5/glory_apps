@@ -4,7 +4,7 @@ class MenuAbsensiData {
     this.titleTxt = '',
     this.startColor = '',
     this.endColor = '',
-    this.meals,
+    this.ket,
     this.kacl = 0,
   });
 
@@ -12,33 +12,37 @@ class MenuAbsensiData {
   String titleTxt;
   String startColor;
   String endColor;
-  List<String>? meals;
+  List<String>? ket;
   int kacl;
 
   static List<MenuAbsensiData> tabIconsList = <MenuAbsensiData>[
     MenuAbsensiData(
-      imagePath: 'assets/images/input.png',
+      imagePath: 'assets/images/camera.png',
       titleTxt: 'Absensi',
-      kacl: 5,
-      meals: <String>['Jangan lupa', 'Absen di sini', 'Guys'],
+      ket: <String>['Jangan lupa', 'Absen di sini', 'Guys'],
       startColor: '#FA7D82',
       endColor: '#FFB295',
     ),
     MenuAbsensiData(
-      imagePath: 'assets/images/data.png',
+      imagePath: 'assets/images/data_absensi.png',
       titleTxt: 'DataAbsen',
-      kacl: 200,
-      meals: <String>['Data Absen', 'yang masuk'],
+      ket: <String>['Data Absen', 'yang masuk'],
       startColor: '#738AE6',
       endColor: '#5C5EDD',
     ),
     MenuAbsensiData(
-      imagePath: 'assets/images/data.png',
+      imagePath: 'assets/images/leaderboard.png',
       titleTxt: 'Leaderboard',
-      kacl: 200,
-      meals: <String>['Cek Leaderboard', 'kalian urutan', 'keberapa yaaa'],
-      startColor: '#738AE6',
-      endColor: '#5C5EDD',
+      ket: <String>['Cek Leaderboard'],
+      startColor: '#FFE214',
+      endColor: '#FFA808',
+    ),
+    MenuAbsensiData(
+      imagePath: 'assets/images/jadwal.png',
+      titleTxt: 'Jadwal',
+      ket: <String>['Cek Libur', 'Dan Cuti'],
+      startColor: '#083352',
+      endColor: '#286DA5',
     ),
   ];
 }

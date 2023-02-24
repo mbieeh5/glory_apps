@@ -163,7 +163,7 @@ class MainMenu extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      menuServiceData!.meals!.join('\n'),
+                                      menuServiceData!.ket!.join('\n'),
                                       style: const TextStyle(
                                         fontFamily: MainAppTheme.fontName,
                                         fontWeight: FontWeight.w500,

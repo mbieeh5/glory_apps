@@ -42,7 +42,7 @@ class BottomView extends StatelessWidget {
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 68, bottom: 12, right: 16, top: 12),
+                                    left: 12, bottom: 12, right: 12, top: 12),
                                 child: Text(
                                   'Jangan Lupa Absen Hari ini ya guys ya!',
                                   textAlign: TextAlign.left,
@@ -60,15 +60,6 @@ class BottomView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Positioned(
-                        top: -12,
-                        left: 0,
-                        child: SizedBox(
-                          width: 80,
-                          height: 80,
-                          child: Image.asset("assets/images/camera.png"),
-                        ),
-                      )
                     ],
                   ),
                 ),

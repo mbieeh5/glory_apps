@@ -159,7 +159,7 @@ class MealsView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      mealsListData!.meals!.join('\n'),
+                                      mealsListData!.ket!.join('\n'),
                                       style: const TextStyle(
                                         fontFamily: MainAppTheme.fontName,
                                         fontWeight: FontWeight.w500,
@@ -192,7 +192,7 @@ class MealsView extends StatelessWidget {
                                         padding:
                                             EdgeInsets.only(left: 4, bottom: 3),
                                         child: Text(
-                                          'kcal',
+                                          '...',
                                           style: TextStyle(
                                             fontFamily: MainAppTheme.fontName,
                                             fontWeight: FontWeight.w500,
