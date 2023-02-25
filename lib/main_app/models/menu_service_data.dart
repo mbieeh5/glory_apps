@@ -2,6 +2,7 @@ class MenuServiceData {
   MenuServiceData({
     this.imagePath = '',
     this.titleTxt = '',
+    this.id = '',
     this.startColor = '',
     this.endColor = '',
     this.ket,
@@ -12,6 +13,7 @@ class MenuServiceData {
   String titleTxt;
   String startColor;
   String endColor;
+  String id;
   List<String>? ket;
   int kacl;
 
@@ -21,6 +23,7 @@ class MenuServiceData {
       titleTxt: 'Input',
       ket: <String>['Jangan lupa', 'input service', 'cuan Guys'],
       startColor: '#FA7D82',
+      id: 'input_service_app()',
       endColor: '#FFB295',
     ),
     MenuServiceData(

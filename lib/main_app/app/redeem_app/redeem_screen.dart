@@ -2,15 +2,15 @@ import 'package:glory_apps/main_app/ui_view/title_view.dart';
 import 'package:flutter/material.dart';
 import '../../main_app_theme.dart';
 
-class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({Key? key, this.animationController}) : super(key: key);
+class RedeemScreen extends StatefulWidget {
+  const RedeemScreen({Key? key, this.animationController}) : super(key: key);
   final AnimationController? animationController;
   @override
   // ignore: library_private_types_in_public_api
-  _HistoryScreenState createState() => _HistoryScreenState();
+  _RedeemScreenState createState() => _RedeemScreenState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen>
+class _RedeemScreenState extends State<RedeemScreen>
     with TickerProviderStateMixin {
   Animation<double>? topBarAnimation;
 
@@ -159,7 +159,7 @@ class _HistoryScreenState extends State<HistoryScreen>
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'History',
+                                  'Redeem',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: MainAppTheme.fontName,

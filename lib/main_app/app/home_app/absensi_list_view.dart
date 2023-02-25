@@ -1,5 +1,9 @@
 import 'package:glory_apps/main_app/main_app_theme.dart';
 import 'package:glory_apps/main_app/models/menu_absensi_data.dart';
+import 'package:glory_apps/main_app/app/home_app/add_on/add_on_absensi_app/add_on_absensi_app.dart';
+import 'package:glory_apps/main_app/app/home_app/add_on/add_on_cuti_app/add_on_cuti_app.dart';
+import 'package:glory_apps/main_app/app/home_app/add_on/add_on_data_absen_app/add_on_data_absensi_app.dart';
+import 'package:glory_apps/main_app/app/home_app/add_on/add_on_leaderboard_app/add_on_leaderboard_app.dart';
 import 'package:glory_apps/main.dart';
 import 'package:flutter/material.dart';
 
@@ -19,17 +23,17 @@ class AbsensiListView extends StatefulWidget {
 class _AbsensiListViewState extends State<AbsensiListView>
     with TickerProviderStateMixin {
   AnimationController? animationController;
-  List<MenuAbsensiData> mealsListData = MenuAbsensiData.tabIconsList;
+  List<MenuAbsensiData> menuAbsensiData = MenuAbsensiData.tabIconsList;
 
   @override
   void initState() {
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
+        duration: const Duration(milliseconds: 500), vsync: this);
     super.initState();
   }
 
   Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
+    await Future<dynamic>.delayed(const Duration(milliseconds: 10));
     return true;
   }
 
@@ -55,11 +59,11 @@ class _AbsensiListViewState extends State<AbsensiListView>
               child: ListView.builder(
                 padding: const EdgeInsets.only(
                     top: 0, bottom: 0, right: 16, left: 16),
-                itemCount: mealsListData.length,
+                itemCount: menuAbsensiData.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
                   final int count =
-                      mealsListData.length > 10 ? 10 : mealsListData.length;
+                      menuAbsensiData.length > 10 ? 10 : menuAbsensiData.length;
                   final Animation<double> animation =
                       Tween<double>(begin: 0.0, end: 1.0).animate(
                           CurvedAnimation(
@@ -67,10 +71,51 @@ class _AbsensiListViewState extends State<AbsensiListView>
                               curve: Interval((1 / count) * index, 1.0,
                                   curve: Curves.fastOutSlowIn)));
                   animationController?.forward();
-                  return MealsView(
-                    mealsListData: mealsListData[index],
-                    animation: animation,
-                    animationController: animationController!,
+                  return InkWell(
+                    onTap: () {
+                      if (index == 0) {
+                        animationController?.reverse().then<dynamic>((data) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AbsensiApp(
+                                      animationController:
+                                          animationController)));
+                        });
+                      } else if (index == 1) {
+                        animationController?.reverse().then<dynamic>((data) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DataAbsenApp(
+                                      animationController:
+                                          animationController)));
+                        });
+                      } else if (index == 2) {
+                        animationController?.reverse().then<dynamic>((data) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LeaderboardApp(
+                                      animationController:
+                                          animationController)));
+                        });
+                      } else if (index == 3) {
+                        animationController?.reverse().then<dynamic>((data) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => JadwalCutiApp(
+                                      animationController:
+                                          animationController)));
+                        });
+                      }
+                    },
+                    child: MenuAbsen(
+                      menuAbsensiData: menuAbsensiData[index],
+                      animation: animation,
+                      animationController: animationController!,
+                    ),
                   );
                 },
               ),
@@ -82,12 +127,15 @@ class _AbsensiListViewState extends State<AbsensiListView>
   }
 }
 
-class MealsView extends StatelessWidget {
-  const MealsView(
-      {Key? key, this.mealsListData, this.animationController, this.animation})
+class MenuAbsen extends StatelessWidget {
+  const MenuAbsen(
+      {Key? key,
+      this.menuAbsensiData,
+      this.animationController,
+      this.animation})
       : super(key: key);
 
-  final MenuAbsensiData? mealsListData;
+  final MenuAbsensiData? menuAbsensiData;
   final AnimationController? animationController;
   final Animation<double>? animation;
 
@@ -112,15 +160,15 @@ class MealsView extends StatelessWidget {
                       decoration: BoxDecoration(
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                              color: HexColor(mealsListData!.endColor)
+                              color: HexColor(menuAbsensiData!.endColor)
                                   .withOpacity(0.6),
                               offset: const Offset(1.1, 4.0),
                               blurRadius: 8.0),
                         ],
                         gradient: LinearGradient(
                           colors: <HexColor>[
-                            HexColor(mealsListData!.startColor),
-                            HexColor(mealsListData!.endColor),
+                            HexColor(menuAbsensiData!.startColor),
+                            HexColor(menuAbsensiData!.endColor),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -140,7 +188,7 @@ class MealsView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              mealsListData!.titleTxt,
+                              menuAbsensiData!.titleTxt,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontFamily: MainAppTheme.fontName,
@@ -159,7 +207,7 @@ class MealsView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      mealsListData!.ket!.join('\n'),
+                                      menuAbsensiData!.ket!.join('\n'),
                                       style: const TextStyle(
                                         fontFamily: MainAppTheme.fontName,
                                         fontWeight: FontWeight.w500,
@@ -172,60 +220,27 @@ class MealsView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            mealsListData?.kacl != 0
-                                ? Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Text(
-                                        mealsListData!.kacl.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontFamily: MainAppTheme.fontName,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 24,
-                                          letterSpacing: 0.2,
-                                          color: MainAppTheme.white,
-                                        ),
-                                      ),
-                                      const Padding(
-                                        padding:
-                                            EdgeInsets.only(left: 4, bottom: 3),
-                                        child: Text(
-                                          '...',
-                                          style: TextStyle(
-                                            fontFamily: MainAppTheme.fontName,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 10,
-                                            letterSpacing: 0.2,
-                                            color: MainAppTheme.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(
-                                    decoration: BoxDecoration(
-                                      color: MainAppTheme.nearlyWhite,
-                                      shape: BoxShape.circle,
-                                      boxShadow: <BoxShadow>[
-                                        BoxShadow(
-                                            color: MainAppTheme.nearlyBlack
-                                                .withOpacity(0.4),
-                                            offset: const Offset(8.0, 8.0),
-                                            blurRadius: 8.0),
-                                      ],
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: Icon(
-                                        Icons.add,
-                                        color:
-                                            HexColor(mealsListData!.endColor),
-                                        size: 24,
-                                      ),
-                                    ),
-                                  ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: MainAppTheme.nearlyWhite,
+                                shape: BoxShape.circle,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      color: MainAppTheme.nearlyBlack
+                                          .withOpacity(0.4),
+                                      offset: const Offset(8.0, 8.0),
+                                      blurRadius: 8.0),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: Icon(
+                                  Icons.add,
+                                  color: HexColor(menuAbsensiData!.endColor),
+                                  size: 24,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -249,7 +264,7 @@ class MealsView extends StatelessWidget {
                     child: SizedBox(
                       width: 80,
                       height: 80,
-                      child: Image.asset(mealsListData!.imagePath),
+                      child: Image.asset(menuAbsensiData!.imagePath),
                     ),
                   )
                 ],

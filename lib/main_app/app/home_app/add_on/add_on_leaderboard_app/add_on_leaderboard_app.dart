@@ -1,16 +1,16 @@
 import 'package:glory_apps/main_app/ui_view/title_view.dart';
 import 'package:flutter/material.dart';
-import '../../main_app_theme.dart';
+import '../../../../main_app_theme.dart';
 
-class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({Key? key, this.animationController}) : super(key: key);
+class LeaderboardApp extends StatefulWidget {
+  const LeaderboardApp({Key? key, this.animationController}) : super(key: key);
   final AnimationController? animationController;
   @override
   // ignore: library_private_types_in_public_api
-  _HistoryScreenState createState() => _HistoryScreenState();
+  _LeaderboardAppState createState() => _LeaderboardAppState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen>
+class _LeaderboardAppState extends State<LeaderboardApp>
     with TickerProviderStateMixin {
   Animation<double>? topBarAnimation;
 
@@ -27,17 +27,17 @@ class _HistoryScreenState extends State<HistoryScreen>
     addAllListData();
 
     scrollController.addListener(() {
-      if (scrollController.offset >= 24) {
+      if (scrollController.offset >= 36) {
         if (topBarOpacity != 1.0) {
           setState(() {
             topBarOpacity = 1.0;
           });
         }
-      } else if (scrollController.offset <= 24 &&
+      } else if (scrollController.offset <= 36 &&
           scrollController.offset >= 0) {
-        if (topBarOpacity != scrollController.offset / 24) {
+        if (topBarOpacity != scrollController.offset / 36) {
           setState(() {
-            topBarOpacity = scrollController.offset / 24;
+            topBarOpacity = scrollController.offset / 36;
           });
         }
       } else if (scrollController.offset <= 0) {
@@ -60,7 +60,7 @@ class _HistoryScreenState extends State<HistoryScreen>
             curve: const Interval((1 / count) * 0, 1.0,
                 curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
-        title: 'testing',
+        title: 'Peringkat Penerima Service Terbanyak',
       ),
     );
   }
@@ -155,11 +155,17 @@ class _HistoryScreenState extends State<HistoryScreen>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
+                            IconButton(
+                              icon: const Icon(Icons.arrow_back),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'History',
+                                  'Ranking',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: MainAppTheme.fontName,

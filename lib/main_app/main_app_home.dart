@@ -1,6 +1,8 @@
 import 'package:glory_apps/main_app/models/tab_icon_data.dart';
 import 'ui_view/bottom_navigation_view.dart';
 import 'package:glory_apps/main_app/app/history_app/history_screen.dart';
+import 'package:glory_apps/main_app/app/redeem_app/redeem_screen.dart';
+import 'package:glory_apps/main_app/app/settings_app/settings_screen.dart';
 import 'package:glory_apps/main_app/app/home_app/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'main_app_theme.dart';
@@ -108,7 +110,7 @@ class _MainAppHomeState extends State<MainAppHome>
                 }
                 setState(() {
                   tabBody =
-                      HistoryScreen(animationController: animationController);
+                      RedeemScreen(animationController: animationController);
                 });
               });
             } else if (index == 3) {
@@ -118,7 +120,7 @@ class _MainAppHomeState extends State<MainAppHome>
                 }
                 setState(() {
                   tabBody =
-                      HistoryScreen(animationController: animationController);
+                      SettingScreen(animationController: animationController);
                 });
               });
             } else if (index == 4) {

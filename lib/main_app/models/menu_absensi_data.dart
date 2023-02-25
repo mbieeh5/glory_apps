@@ -1,19 +1,17 @@
 class MenuAbsensiData {
   MenuAbsensiData({
-    this.imagePath = '',
-    this.titleTxt = '',
-    this.startColor = '',
-    this.endColor = '',
-    this.ket,
-    this.kacl = 0,
+    required this.imagePath,
+    required this.titleTxt,
+    required this.startColor,
+    required this.endColor,
+    required this.ket,
   });
 
-  String imagePath;
-  String titleTxt;
-  String startColor;
-  String endColor;
-  List<String>? ket;
-  int kacl;
+  late String imagePath;
+  late String titleTxt;
+  late String startColor;
+  late String endColor;
+  late List<String>? ket;
 
   static List<MenuAbsensiData> tabIconsList = <MenuAbsensiData>[
     MenuAbsensiData(

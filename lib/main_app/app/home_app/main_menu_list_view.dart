@@ -1,3 +1,6 @@
+import 'package:glory_apps/main_app/app/home_app/services/input_service_app/input_services_app.dart';
+import 'package:glory_apps/main_app/app/home_app/services/data_service_app/data_service_app.dart';
+import 'package:glory_apps/main_app/app/home_app/services/admin_panel_app/admin_panel_app.dart';
 import 'package:glory_apps/main_app/main_app_theme.dart';
 import 'package:glory_apps/main_app/models/menu_service_data.dart';
 import 'package:glory_apps/main.dart';
@@ -21,15 +24,19 @@ class _MainMenuListViewState extends State<MainMenuListView>
   AnimationController? animationController;
   List<MenuServiceData> menuServiceData = MenuServiceData.tabIconsList;
 
+  Widget tabBody = Container(
+    color: MainAppTheme.background,
+  );
+
   @override
   void initState() {
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
+        duration: const Duration(milliseconds: 500), vsync: this);
     super.initState();
   }
 
   Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
+    await Future<dynamic>.delayed(const Duration(milliseconds: 10));
     return true;
   }
 
@@ -67,11 +74,42 @@ class _MainMenuListViewState extends State<MainMenuListView>
                               curve: Interval((1 / count) * index, 1.0,
                                   curve: Curves.fastOutSlowIn)));
                   animationController?.forward();
-
-                  return MainMenu(
-                    menuServiceData: menuServiceData[index],
-                    animation: animation,
-                    animationController: animationController!,
+                  return InkWell(
+                    onTap: () {
+                      if (index == 0) {
+                        animationController?.reverse().then<dynamic>((data) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => InputServiceApp(
+                                      animationController:
+                                          animationController)));
+                        });
+                      } else if (index == 1) {
+                        animationController?.reverse().then<dynamic>((data) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DataServiceApp(
+                                      animationController:
+                                          animationController)));
+                        });
+                      } else if (index == 2) {
+                        animationController?.reverse().then<dynamic>((data) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminPanelApp(
+                                      animationController:
+                                          animationController)));
+                        });
+                      }
+                    },
+                    child: MainMenu(
+                      menuServiceData: menuServiceData[index],
+                      animation: animation,
+                      animationController: animationController!,
+                    ),
                   );
                 },
               ),
@@ -176,60 +214,27 @@ class MainMenu extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            menuServiceData?.kacl != 0
-                                ? Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Text(
-                                        menuServiceData!.kacl.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontFamily: MainAppTheme.fontName,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 24,
-                                          letterSpacing: 0.2,
-                                          color: MainAppTheme.white,
-                                        ),
-                                      ),
-                                      const Padding(
-                                        padding:
-                                            EdgeInsets.only(left: 4, bottom: 3),
-                                        child: Text(
-                                          '...',
-                                          style: TextStyle(
-                                            fontFamily: MainAppTheme.fontName,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 10,
-                                            letterSpacing: 0.2,
-                                            color: MainAppTheme.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(
-                                    decoration: BoxDecoration(
-                                      color: MainAppTheme.nearlyWhite,
-                                      shape: BoxShape.circle,
-                                      boxShadow: <BoxShadow>[
-                                        BoxShadow(
-                                            color: MainAppTheme.nearlyBlack
-                                                .withOpacity(0.4),
-                                            offset: const Offset(8.0, 8.0),
-                                            blurRadius: 8.0),
-                                      ],
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: Icon(
-                                        Icons.add,
-                                        color:
-                                            HexColor(menuServiceData!.endColor),
-                                        size: 24,
-                                      ),
-                                    ),
-                                  ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: MainAppTheme.nearlyWhite,
+                                shape: BoxShape.circle,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      color: MainAppTheme.nearlyBlack
+                                          .withOpacity(0.4),
+                                      offset: const Offset(8.0, 8.0),
+                                      blurRadius: 8.0),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: Icon(
+                                  Icons.add,
+                                  color: HexColor(menuServiceData!.endColor),
+                                  size: 24,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -255,7 +260,7 @@ class MainMenu extends StatelessWidget {
                       height: 80,
                       child: Image.asset(menuServiceData!.imagePath),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
